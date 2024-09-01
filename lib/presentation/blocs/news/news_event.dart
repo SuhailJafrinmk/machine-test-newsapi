@@ -7,3 +7,4 @@ class AddToFavourites extends NewsEvent{
   final Article article;
   AddToFavourites({required this.article});
 }
+class GetFavorites extends NewsEvent{}

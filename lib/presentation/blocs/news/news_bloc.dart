@@ -14,6 +14,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   NewsBloc(this.newsRepository,this.favouritesRepository) : super(NewsInitial()) {
     on<FetchAllNews>(fetchAllNews);
     on<AddToFavourites>(addToFavourites);
+    on<GetFavorites>(getFavorites);
   }
 
   FutureOr<void> fetchAllNews(
@@ -44,5 +45,11 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     } catch (e) {
       logError('error adding favorites to hive ${e.toString()}');
     }
+  }
+
+  FutureOr<void> getFavorites(GetFavorites event, Emitter<NewsState> emit) {
+    logInfo('inside the event handler for getting favourites');
+    final List<Article> favorites=favouritesRepository.getFavourites();
+    emit(FetchedFavouriteArticles(favourites: favorites));
   }
 }

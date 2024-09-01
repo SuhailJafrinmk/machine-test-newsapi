@@ -13,3 +13,7 @@ class ErrorFetchingAllNews extends NewsState{
   final String errorMessage;
   ErrorFetchingAllNews({required this.errorMessage});
 }
+class FetchedFavouriteArticles extends NewsState{
+  final List<Article> favourites;
+  FetchedFavouriteArticles({required this.favourites});
+}
