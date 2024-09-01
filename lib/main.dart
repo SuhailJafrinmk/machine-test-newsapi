@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:kalpas_machine_test/config/theme.dart';
 import 'package:kalpas_machine_test/core/network/dio_factory.dart';
+import 'package:kalpas_machine_test/data/datasources/local/hive/hive_adapter_register.dart';
 import 'package:kalpas_machine_test/data/repositories/news_repository_impl.dart';
-import 'package:kalpas_machine_test/domain/repositories/news_repository.dart';
+import 'package:kalpas_machine_test/domain/repositories/favourites_repository.dart';
 import 'package:kalpas_machine_test/injection_container.dart';
 import 'package:kalpas_machine_test/presentation/blocs/news/news_bloc.dart';
 import 'package:kalpas_machine_test/presentation/pages/news_favourites/news_favourites_page.dart';
 import 'package:kalpas_machine_test/injection_container.dart' as di;
 
-void main() {
+  Future<void> main()async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  HiveAdaptersRegister.registerAdapters();
+  await di.init();
   DioClient.instance.initialize();
-  di.init();
   runApp(const MyApp());
 }
 
@@ -24,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
          BlocProvider<NewsBloc>(
-          create: (context) => NewsBloc(sl<NewsRepositoryImpl>()),
+          create: (context) => NewsBloc(sl<NewsRepositoryImpl>(),sl<FavouritesRepository>()),
         ),
       ],
       child: MaterialApp(

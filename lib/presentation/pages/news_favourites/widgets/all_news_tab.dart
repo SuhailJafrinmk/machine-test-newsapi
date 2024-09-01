@@ -3,7 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kalpas_machine_test/presentation/blocs/news/news_bloc.dart';
 import 'package:kalpas_machine_test/presentation/pages/news_favourites/widgets/newslist_tile.dart';
 
-class AllNewsTab extends StatelessWidget {
+class AllNewsTab extends StatefulWidget {
+  @override
+  State<AllNewsTab> createState() => _AllNewsTabState();
+}
+
+class _AllNewsTabState extends State<AllNewsTab> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<NewsBloc>(context).add(FetchAllNews());
+  }
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -18,7 +28,7 @@ class AllNewsTab extends StatelessWidget {
                 itemCount: data.length,
                 itemBuilder: (context, index) {
                   final singleNews = data[index];
-                  return NewsTile(article: singleNews);
+                  return NewsTile(article: singleNews,);
                 },
               );
             }

@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:kalpas_machine_test/core/utils/custom_logger.dart';
-import 'package:kalpas_machine_test/data/models/news_model.dart';
+import 'package:kalpas_machine_test/data/models/article_model.dart';
+import 'package:kalpas_machine_test/domain/repositories/favourites_repository.dart';
 import 'package:kalpas_machine_test/domain/repositories/news_repository.dart';
 import 'package:meta/meta.dart';
 part 'news_event.dart';
@@ -9,8 +10,10 @@ part 'news_state.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   final NewsRepository newsRepository;
-  NewsBloc(this.newsRepository) : super(NewsInitial()) {
+  final FavouritesRepository favouritesRepository;
+  NewsBloc(this.newsRepository,this.favouritesRepository) : super(NewsInitial()) {
     on<FetchAllNews>(fetchAllNews);
+    on<AddToFavourites>(addToFavourites);
   }
 
   FutureOr<void> fetchAllNews(
@@ -31,5 +34,15 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
         emit(AllNewsFetched(allNews: allNews));
       },
     );
+  }
+
+  FutureOr<void> addToFavourites(AddToFavourites event, Emitter<NewsState> emit) async{
+    logInfo('inside the event handler for adding the new to favourites');
+    try {
+      await favouritesRepository.addToFavourites(event.article);
+      logInfo('successfully added to hive');
+    } catch (e) {
+      logError('error adding favorites to hive ${e.toString()}');
+    }
   }
 }

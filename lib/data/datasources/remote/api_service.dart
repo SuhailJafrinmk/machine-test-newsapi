@@ -8,10 +8,10 @@ class ApiServices {
   Future<Response> getAllNews() async {
     logInfo('inside the api service of getallnews');
     final Response response = await DioClient.instance.dio.get(
-        ApiConstants.getTopHeadlines,
+        ApiConstants.getAllNews,
         queryParameters: {
-          'country': 'in',
-          'apiKey': AppConfig.apiKey
+          'q': 'sports',
+          'apiKey': AppConfig.apiKey,
           });
     logInfo('the raw data for getallnews is $response');
     return response;

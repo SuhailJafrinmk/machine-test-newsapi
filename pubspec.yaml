@@ -39,6 +39,11 @@ dependencies:
   dart_either: ^1.0.0
   flutter_bloc: ^8.1.6
   get_it: ^7.6.7
+  flutter_slidable: ^3.1.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.9
 
 dev_dependencies:
   flutter_test:

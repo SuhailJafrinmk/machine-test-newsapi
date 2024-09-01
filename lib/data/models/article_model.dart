@@ -1,12 +1,32 @@
-class Article {
-  Source source;
-  String? author;
-  String title;
-  String? description;
-  String url;
-  String? urlToImage;
-  String publishedAt;
-  String? content;
+import 'package:hive/hive.dart';
+import 'package:kalpas_machine_test/data/models/source_model.dart';
+part 'article_model.g.dart'; 
+
+@HiveType(typeId: 0)
+class Article extends HiveObject {
+  @HiveField(0)
+  final Source source;
+
+  @HiveField(1)
+  final String? author;
+
+  @HiveField(2)
+  final String title;
+
+  @HiveField(3)
+  final String? description;
+
+  @HiveField(4)
+  final String url;
+
+  @HiveField(5)
+  final String? urlToImage;
+
+  @HiveField(6)
+  final String publishedAt;
+
+  @HiveField(7)
+  final String? content;
 
   Article({
     required this.source,
@@ -42,27 +62,6 @@ class Article {
       'urlToImage': urlToImage,
       'publishedAt': publishedAt,
       'content': content,
-    };
-  }
-}
-
-class Source {
-  String? id;
-  String name;
-
-  Source({this.id, required this.name});
-
-  factory Source.fromJson(Map<String, dynamic> json) {
-    return Source(
-      id: json['id'],
-      name: json['name'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
     };
   }
 }

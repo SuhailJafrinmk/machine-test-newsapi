@@ -8,9 +8,7 @@ class FavouritedNewsTab extends StatelessWidget {
   Widget build(BuildContext context) {
   final bloc=BlocProvider.of<NewsBloc>(context);
     return Center(
-      child: ElevatedButton(onPressed: (){
-        bloc.add(FetchAllNews());
-      }, child: Text('fetchnews')),
+     
     );
   }
 }
