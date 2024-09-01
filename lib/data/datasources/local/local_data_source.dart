@@ -4,6 +4,7 @@ import 'package:kalpas_machine_test/data/models/article_model.dart';
 abstract class LocalDataSource {
   Future<void> addFavorite(Article article);
   List<Article> getFavorites();
+  Future<void> removeFavorites(String id);
 }
 
 class LocalDataSourceImpl implements LocalDataSource {
@@ -19,5 +20,9 @@ class LocalDataSourceImpl implements LocalDataSource {
   @override
   List<Article> getFavorites() {
     return favoritesBox.values.toList();
+  }
+  @override
+  Future<void> removeFavorites(String id)async{
+    await favoritesBox.delete(id);
   }
 }

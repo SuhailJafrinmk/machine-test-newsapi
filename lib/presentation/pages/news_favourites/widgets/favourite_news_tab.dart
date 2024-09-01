@@ -21,21 +21,30 @@ class _FavouritedNewsTabState extends State<FavouritedNewsTab> {
      return SizedBox(
         width: double.infinity,
         height: double.infinity,
-        child: BlocBuilder<NewsBloc, NewsState>(
+        child: BlocConsumer<NewsBloc, NewsState>(
+          listener: (context, state) {
+            if(state is RemovedFromFavourites){
+              BlocProvider.of<NewsBloc>(context).add(GetFavorites());
+            }
+          },
           builder: (context, state) {
-            if (state is FetchedFavouriteArticles) {
+                  if (state is FetchedFavouriteArticles) {     
               final data = state.favourites;
+              if(data.isEmpty){
+                return Center(child: Text('No items in favourites list'),);
+              }
               return ListView.builder(
                 scrollDirection: Axis.vertical,
                 itemCount: data.length,
                 itemBuilder: (context, index) {
                   final singleNews = data[index];
-                  return NewsTile(article: singleNews,);
+                  return NewsTile(article: singleNews,isFavorite: true,);
                 },
               );
             }
             return SizedBox();
           },
-        ));
+        ),
+        );
   }
 }

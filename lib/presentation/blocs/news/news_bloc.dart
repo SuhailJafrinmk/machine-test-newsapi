@@ -11,10 +11,12 @@ part 'news_state.dart';
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   final NewsRepository newsRepository;
   final FavouritesRepository favouritesRepository;
-  NewsBloc(this.newsRepository,this.favouritesRepository) : super(NewsInitial()) {
+  NewsBloc(this.newsRepository, this.favouritesRepository)
+      : super(NewsInitial()) {
     on<FetchAllNews>(fetchAllNews);
     on<AddToFavourites>(addToFavourites);
     on<GetFavorites>(getFavorites);
+    on<RemoveFavourites>(removeFavourites);
   }
 
   FutureOr<void> fetchAllNews(
@@ -37,7 +39,8 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     );
   }
 
-  FutureOr<void> addToFavourites(AddToFavourites event, Emitter<NewsState> emit) async{
+  FutureOr<void> addToFavourites(
+      AddToFavourites event, Emitter<NewsState> emit) async {
     logInfo('inside the event handler for adding the new to favourites');
     try {
       await favouritesRepository.addToFavourites(event.article);
@@ -49,7 +52,19 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
 
   FutureOr<void> getFavorites(GetFavorites event, Emitter<NewsState> emit) {
     logInfo('inside the event handler for getting favourites');
-    final List<Article> favorites=favouritesRepository.getFavourites();
+    final List<Article> favorites = favouritesRepository.getFavourites();
     emit(FetchedFavouriteArticles(favourites: favorites));
+  }
+
+
+  FutureOr<void> removeFavourites(RemoveFavourites event, Emitter<NewsState> emit)async{
+       logInfo('inside the event handler for removing items from favourites list');
+    try {
+      await favouritesRepository.removeFavorites(event.id);
+      emit(RemovedFromFavourites());
+      logInfo('successfully removed from  hive');
+    } catch (e) {
+      logError('error removing favorites to hive ${e.toString()}');
+    }
   }
 }

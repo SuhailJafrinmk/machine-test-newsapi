@@ -8,3 +8,7 @@ class AddToFavourites extends NewsEvent{
   AddToFavourites({required this.article});
 }
 class GetFavorites extends NewsEvent{}
+class RemoveFavourites extends NewsEvent{
+  final String id;
+  RemoveFavourites({required this.id});
+}

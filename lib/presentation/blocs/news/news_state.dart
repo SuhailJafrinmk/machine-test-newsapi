@@ -17,3 +17,4 @@ class FetchedFavouriteArticles extends NewsState{
   final List<Article> favourites;
   FetchedFavouriteArticles({required this.favourites});
 }
+class RemovedFromFavourites extends NewsState{}

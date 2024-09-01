@@ -14,6 +14,12 @@ class FavouritesRepositoryImpl implements FavouritesRepository {
 
   @override
   List<Article> getFavourites() {
+    logInfo('inside the getfavourites function of implementation class....');
     return localDataSource.getFavorites();
+  }
+  @override
+  Future<void> removeFavorites(String id)async{
+    logInfo('inside the removefavourites function of repository implementation class....');
+    await localDataSource.removeFavorites(id);
   }
 }
