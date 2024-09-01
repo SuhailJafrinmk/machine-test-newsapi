@@ -21,7 +21,6 @@ class NewsFavouritesPage extends StatelessWidget {
               NewsTab(icon: Icons.favorite, label: 'Favs', iconColor: Colors.red),
             ],
           ),
-          title: const Text('News & Favourites'),
         ),
         body: TabBarView(
           children: [

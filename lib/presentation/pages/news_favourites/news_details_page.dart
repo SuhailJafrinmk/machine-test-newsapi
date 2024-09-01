@@ -21,6 +21,7 @@ class NewsDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme=Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -51,20 +52,22 @@ class NewsDetailsPage extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: SizedBox(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(height: 20,),
                       Text(
                         article.title,
-                        style: Theme.of(context).textTheme.headline6,
+                        style: theme.textTheme.headline1,
                         overflow: TextOverflow.ellipsis,  // Handle overflow
+                        maxLines: 2,
                       ),
                       SizedBox(height: 8),
                       Text(
                         article.publishedAt,
-                        style: Theme.of(context).textTheme.subtitle2,
+                        style: theme.textTheme.bodyText2
                       ),
                     ],
                   ),
@@ -76,7 +79,7 @@ class NewsDetailsPage extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Text(
                       article.description ?? 'Not available',
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: theme.textTheme.bodyText1,
                     ),
                   ),
                 ),
