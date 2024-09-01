@@ -1,5 +1,28 @@
 import 'package:kalpas_machine_test/core/error/exceptions.dart';
-AppExceptions mapStatusCodeToException(int ? statusCode) {
+
+/// Maps an HTTP status code to a specific [AppExceptions] subclass.
+///
+/// This function takes an optional [statusCode] and returns an instance of a subclass
+/// of [AppExceptions] that corresponds to the given HTTP status code. Each HTTP status code
+/// is mapped to a specific exception type with a predefined error message.
+///
+/// The function handles common HTTP status codes and provides relevant exception types.
+/// If the status code does not match any of the predefined cases, a generic [AppExceptions]
+/// instance with the status code included in the error message is returned.
+///
+/// [statusCode] is an optional integer that represents the HTTP status code returned from
+/// a server response.
+///
+/// Returns:
+/// - An instance of [AppExceptions] or one of its subclasses that corresponds to the
+///   given HTTP status code.
+///
+/// Example usage:
+/// ```dart
+/// final exception = mapStatusCodeToException(404);
+/// // exception is an instance of [ResourceNotFoundException].
+/// ```
+AppExceptions mapStatusCodeToException(int? statusCode) {
   switch (statusCode) {
     case 400:
       return AppExceptions(errorMessage: 'Bad request');
@@ -20,14 +43,14 @@ AppExceptions mapStatusCodeToException(int ? statusCode) {
     case 500:
       return InternalServerException();
     case 501:
-      return AppExceptions(errorMessage: 'not implemented');
+      return AppExceptions(errorMessage: 'Not implemented');
     case 502:
       return AppExceptions(errorMessage: 'Bad gateway');
     case 503:
       return AppExceptions(errorMessage: 'Service unavailable');
     case 504:
-      return AppExceptions(errorMessage: 'Gate-way time out');
+      return AppExceptions(errorMessage: 'Gateway timeout');
     default:
-      return AppExceptions(errorMessage: 'ERror! $statusCode');
+      return AppExceptions(errorMessage: 'Error! $statusCode');
   }
 }

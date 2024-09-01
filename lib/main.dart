@@ -12,7 +12,11 @@ import 'package:kalpas_machine_test/presentation/blocs/news/news_bloc.dart';
 import 'package:kalpas_machine_test/presentation/pages/news_favourites/news_favourites_page.dart';
 import 'package:kalpas_machine_test/injection_container.dart' as di;
 
-  Future<void> main()async{
+/// Entry point for the Flutter application.
+///
+/// Initializes Flutter bindings, Hive, and dependency injection.
+/// Runs the app with [MyApp] as the root widget.
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   HiveAdaptersRegister.registerAdapters();
@@ -21,6 +25,9 @@ import 'package:kalpas_machine_test/injection_container.dart' as di;
   runApp(const MyApp());
 }
 
+/// The root widget of the application.
+///
+/// Sets up the [MultiBlocProvider] with the [NewsBloc] and initializes the application with [MaterialApp].
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -28,8 +35,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-         BlocProvider<NewsBloc>(
-          create: (context) => NewsBloc(sl<NewsRepositoryImpl>(),sl<FavouritesRepository>()),
+        BlocProvider<NewsBloc>(
+          create: (context) => NewsBloc(sl<NewsRepositoryImpl>(), sl<FavouritesRepository>()),
         ),
       ],
       child: MaterialApp(

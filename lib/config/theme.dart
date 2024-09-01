@@ -1,52 +1,38 @@
+
 import 'package:flutter/material.dart';
+import 'package:kalpas_machine_test/core/utils/constants.dart';
+
 
 final ThemeData appTheme = ThemeData(
   brightness: Brightness.light,
   colorScheme: const ColorScheme(
-    primary:  Color(0xFFE8ECF4),   
-    primaryContainer: Color(0xFFE8ECF4),
-    secondary: Color(0xFFFBDADA), 
-    secondaryContainer: Color(0xFFFBDADA),
-    background: Colors.white, 
-    surface: Colors.white,       
-    onPrimary: Color(0xFF1A1A1A),
-    onSecondary: Colors.white,    
-    onBackground: Color(0xFF1A1A1A),
-    onSurface: Color(0xFF1A1A1A),
-    error: Colors.red,           
-    onError: Colors.white,
+    primary: AppColors.primary,   
+    primaryContainer: AppColors.primaryContainer,
+    secondary: AppColors.secondary, 
+    secondaryContainer: AppColors.secondaryContainer,
+    background: AppColors.background, 
+    surface: AppColors.surface,       
+    onPrimary: AppColors.onPrimary,
+    onSecondary: AppColors.onSecondary,    
+    onBackground: AppColors.onBackground,
+    onSurface: AppColors.onSurface,
+    error: AppColors.error,           
+    onError: AppColors.onError,
     brightness: Brightness.light, 
   ),
   
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: AppColors.background,
 
   textTheme: const TextTheme(
-    headline1: TextStyle(
-      fontSize: 24.0,
-      fontWeight: FontWeight.bold,
-      color: Color(0xFF1A1A1A),
-    ),
-    headline6: TextStyle(
-      fontSize: 18.0,
-      fontWeight: FontWeight.w600,
-      color: Color(0xFF1A1A1A),
-    ),
-    bodyText1: TextStyle(
-      fontSize: 16.0,
-      color: Color(0xFF1A1A1A),
-    ),
-    bodyText2: TextStyle(
-      fontSize: 14.0,
-      color: Color(0xFF6B6B6B),
-    ),
-    caption: TextStyle(
-      fontSize: 12.0,
-      color: Color(0xFF6B6B6B),
-    ),
+    headline1: AppTextStyles.headline1,
+    headline6: AppTextStyles.headline6,
+    bodyText1: AppTextStyles.bodyText1,
+    bodyText2: AppTextStyles.bodyText2,
+    caption: AppTextStyles.caption,
   ),
   
   cardTheme: CardTheme(
-    color: Colors.white,
+    color: AppColors.surface,
     elevation: 3,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8.0),
@@ -55,7 +41,7 @@ final ThemeData appTheme = ThemeData(
   ),
   
   buttonTheme: ButtonThemeData(
-    buttonColor: const Color(0xFFFBDADA),
+    buttonColor: AppColors.secondary,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12.0),
     ),
@@ -63,25 +49,21 @@ final ThemeData appTheme = ThemeData(
   ),
   
   iconTheme: const IconThemeData(
-    color: Color(0xFF1A1A1A),
+    color: AppColors.onPrimary,
   ),
   
-  appBarTheme: const AppBarTheme(
-    color: Colors.white,
-    iconTheme: IconThemeData(
-      color: Color(0xFF1A1A1A),
+  appBarTheme:  AppBarTheme(
+    color: AppColors.surface,
+    iconTheme: const IconThemeData(
+      color: AppColors.onPrimary,
     ),
-    titleTextStyle: TextStyle(
-      color: Color(0xFF1A1A1A),
-      fontSize: 20.0,
-      fontWeight: FontWeight.bold,
-    ),
+    titleTextStyle: AppTextStyles.headline6.copyWith(fontSize: 20.0),
     elevation: 0,
   ),
   
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      primary: const Color(0xFFFBDADA),
+      primary: AppColors.secondary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -97,7 +79,7 @@ final ThemeData appTheme = ThemeData(
       borderRadius: BorderRadius.circular(8.0),
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: const BorderSide(color: Color(0xFFE8ECF4)),
+      borderSide: const BorderSide(color: AppColors.primary),
       borderRadius: BorderRadius.circular(8.0),
     ),
     enabledBorder: OutlineInputBorder(

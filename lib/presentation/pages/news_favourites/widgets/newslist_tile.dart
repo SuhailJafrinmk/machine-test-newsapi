@@ -8,15 +8,26 @@ import 'package:kalpas_machine_test/presentation/blocs/news/news_bloc.dart';
 import 'package:kalpas_machine_test/presentation/pages/news_favourites/news_details_page.dart';
 import 'package:kalpas_machine_test/presentation/widgets/custom_snackbar.dart';
 
+/// A tile widget that displays a news article with options to add or remove from favorites.
+///
+/// This widget uses [Slidable] to provide a swipeable action for favoriting or unfavoriting a news article.
+/// Tapping on the tile navigates to the detailed view of the news article.
 class NewsTile extends StatelessWidget {
-  final Article article;
-  final bool isFavorite;
-
+  /// Creates a [NewsTile] with the given [article] and an optional [isFavorite] flag.
+  ///
+  /// The [article] parameter is required and specifies the news article to display.
+  /// The [isFavorite] parameter is optional and indicates if the article is currently marked as a favorite.
   const NewsTile({
     super.key,
     required this.article,
     this.isFavorite = false, 
   });
+
+  /// The news article to be displayed in the tile.
+  final Article article;
+
+  /// Indicates whether the article is marked as a favorite.
+  final bool isFavorite;
 
   @override
   Widget build(BuildContext context) {

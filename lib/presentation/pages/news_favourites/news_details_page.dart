@@ -3,16 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:kalpas_machine_test/core/utils/constants.dart';
 import 'package:kalpas_machine_test/data/models/article_model.dart';
 
+/// A page that displays detailed information about a specific news article.
+///
+/// This widget presents a detailed view of a news article including its
+/// image, title, publication date, and description.
+///
+/// The [article] parameter is required and represents the news article 
+/// whose details will be shown on this page.
 class NewsDetailsPage extends StatelessWidget {
+  /// Creates an instance of [NewsDetailsPage].
+  ///
+  /// The [article] parameter must not be null and should provide the
+  /// details of the news article to be displayed.
   final Article article;
+
   const NewsDetailsPage({super.key, required this.article});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        }, icon:Icon(CupertinoIcons.back)),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(CupertinoIcons.back),
+        ),
         title: Text('Back'),
       ),
       body: SizedBox(
@@ -27,7 +43,11 @@ class NewsDetailsPage extends StatelessWidget {
                 child: SizedBox(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image.network(article.urlToImage ?? AppAssetImages.placeholderImage)),
+                    child: Image.network(
+                      article.urlToImage ?? AppAssetImages.placeholderImage,
+                      fit: BoxFit.cover,  // Ensure the image covers the area
+                    ),
+                  ),
                 ),
               ),
               Expanded(
@@ -36,17 +56,31 @@ class NewsDetailsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(article.title),
-                      Text(article.publishedAt ),
+                      Text(
+                        article.title,
+                        style: Theme.of(context).textTheme.headline6,
+                        overflow: TextOverflow.ellipsis,  // Handle overflow
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        article.publishedAt,
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
                     ],
                   ),
-                )
                 ),
-                Expanded(
-                  flex: 6,
-                  child: SizedBox(
-                  child: Text(article.description ?? 'not available'),
-                )),
+              ),
+              Expanded(
+                flex: 6,
+                child: SizedBox(
+                  child: SingleChildScrollView(
+                    child: Text(
+                      article.description ?? 'Not available',
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
